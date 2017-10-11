@@ -1,11 +1,6 @@
 public class PersonService
 {
-  private PersistenceContext persistence;
-
-  public PersonService(PersistenceContext persistence)
-  {
-    this.persistence = persistence;
-  }
+  private PersistenceContext persistence = new PersistenceContext();
 
   public void addPerson(Person personToAdd)
   {
