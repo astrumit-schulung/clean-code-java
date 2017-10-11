@@ -5,14 +5,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class PersonService {
+	private List<Person> existingPersons;
+
 	public void notifyIfExists(Person toBeNotified) {
 		if (exists(toBeNotified)) {
 			MailGateway.notify(toString());
 		}
 	}
+	
+	public void setExistingPersons(List<Person> existingPersons) {
+		this.existingPersons = existingPersons;
+	}
 
 	private boolean exists(Person toBeNotified) {
-		List<String> existingPersonsLastName = Arrays.asList(new String[] {"Maier", "Fischer", "Huber"});
-		return existingPersonsLastName.contains(toBeNotified.getLastName());
+		return existingPersons.contains(toBeNotified);
 	}
 }
