@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PersistenceContext
@@ -12,9 +13,8 @@ public class PersistenceContext
     	Statement st = conn.createStatement(); 
         st.executeUpdate(String.format("INSERT INTO Person (Firstname, Lastname) " + 
             "VALUES ('%s', '%s')", newPerson.getFirstName(), newPerson.getLastName())); 
-    } catch (Exception e) { 
-        System.err.println("Got an exception! "); 
-        System.err.println(e.getMessage()); 
-    } 
+    } catch (SQLException e) {
+		throw new RuntimeException(e);
+	}
   }
 }
