@@ -9,7 +9,7 @@ public class PersonService {
 
 	public void notifyIfExists(Person toBeNotified) {
 		if (exists(toBeNotified)) {
-			MailGateway.notify(toString());
+			MailGateway.notify(toBeNotified);
 		}
 	}
 	
