@@ -1,22 +1,23 @@
 package org.astrumit.StatischeAbhaengigkeit;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class PersonService {
 	private List<Person> existingPersons;
-	private IMailGateway mailGateway;
+	private Consumer<Person> notifyPerson;
 
 	public PersonService() {
-		this(new MailGatewayFacade());
+		this(p -> MailGateway.notify(p));
 	}
 	
-	public PersonService(IMailGateway mailGateway) {
-		this.mailGateway = mailGateway;
+	public PersonService(Consumer<Person> notifyPerson) {
+		this.notifyPerson = notifyPerson;
 	}
 	
 	public void notifyIfExists(Person toBeNotified) {
 		if (exists(toBeNotified)) {
-			mailGateway.notify(toBeNotified);
+			notifyPerson.accept(toBeNotified);
 		}
 	}
 	
